@@ -73,10 +73,27 @@ Run it together with `sort-by-length/imports` (from `eslint-plugin-sort-by-lengt
 decides which group the split-off `import type` lands in, so on its own this fixer leaves it glued
 to the value import.
 
+```ts
+// ❌
+import { useState, type FC } from 'react';
+
+// ✅
+import { useState } from 'react';
+import type { FC } from 'react';
+```
+
 ### handler-prefix
 
 Reports declarations named `handleX`. Options: `prefix` (default `'on'`) and `banned` (default
 `['handle']`).
+
+```ts
+// ❌
+function handleClick() {}
+
+// ✅
+function onClick() {}
+```
 
 ### no-arrow-handler
 
@@ -84,12 +101,32 @@ Reports `const onX = () => {}` and `const handleX = function () {}`. Arrow funct
 function declarations unless the variable has a type annotation or the body uses `this`. Option
 `pattern` (default `'^(?:on|handle)[A-Z0-9]'`) selects which names count as handlers.
 
+```ts
+// ❌
+const onClick = () => setOpen(true);
+
+// ✅
+function onClick() {
+  return setOpen(true);
+}
+```
+
 ### boolean-prefix
 
 Reports variables, parameters and properties that are clearly boolean but lack a prefix. A value
 counts as boolean when it has a `boolean` type annotation or when its initializer is `true`/`false`,
 a `!` expression, a comparison, `Boolean(x)`, or a logical/conditional expression made only of
 those. Constants such as `IS_ENABLED` and names with a leading `_` are accepted.
+
+```ts
+// ❌
+const visible = true;
+const disabled = count === 0;
+
+// ✅
+const isVisible = true;
+const isDisabled = count === 0;
+```
 
 | Option | Default | Meaning |
 |---|---|---|
@@ -101,6 +138,16 @@ those. Constants such as `IS_ENABLED` and names with a leading `_` are accepted.
 Reports `const data = ...` and similar. When destructuring the result of a hook (`useX()`), also
 reports bare `data`, `isLoading` and friends, so you alias them: `const { data: userData } = useUser()`.
 
+```ts
+// ❌
+const data = await getUsers();
+const { data, isLoading } = useUser();
+
+// ✅
+const users = await getUsers();
+const { data: userData, isLoading: isUserLoading } = useUser();
+```
+
 | Option | Default | Meaning |
 |---|---|---|
 | `names` | `data`, `list`, `items`, `value`, `temp`, `isLoading`, `isFetching`, `isError`, `isSuccess` | Banned names |
@@ -111,6 +158,20 @@ reports bare `data`, `isLoading` and friends, so you alias them: `const { data: 
 In component files, reports module-level constants and helper functions. PascalCase components
 (functions, classes, `memo(...)`, `forwardRef(...)`) and `useX` hooks are allowed.
 
+```tsx
+// ❌ UserCard.tsx
+const MAX_ITEMS = 10;
+function formatName(name: string) {}
+
+export function UserCard() {}
+
+// ✅ UserCard.tsx
+import { MAX_ITEMS } from './UserCard.const';
+import { formatName } from './UserCard.utils';
+
+export function UserCard() {}
+```
+
 | Option | Default | Meaning |
 |---|---|---|
 | `filePattern` | `'\\.tsx$'` | Files the rule applies to |
@@ -120,6 +181,16 @@ In component files, reports module-level constants and helper functions. PascalC
 
 Reports `{cond && <JSX />}` used as a JSX child. Option `component` (default `'Show'`) changes the
 name shown in the message. The rule does not fix, because it cannot add the import for you.
+
+```tsx
+// ❌
+{isOpen && <Modal />}
+
+// ✅
+<Show when={isOpen}>
+  <Modal />
+</Show>
+```
 
 ## Rules that overlap with other plugins
 
