@@ -1,0 +1,51 @@
+{
+  "name": "eslint-plugin-code-conventions",
+  "version": "0.1.0",
+  "description": "ESLint rules for team naming and structure conventions in React and TypeScript projects: handler and boolean naming, generic names, separate type imports, component file structure.",
+  "keywords": [
+    "eslint",
+    "eslintplugin",
+    "eslint-plugin",
+    "naming-convention",
+    "react",
+    "typescript",
+    "conventions"
+  ],
+  "license": "MIT",
+  "author": "Tamerlan Pirmammadov",
+  "main": "src/index.js",
+  "exports": {
+    ".": "./src/index.js",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "src",
+    "README.md",
+    "CHANGELOG.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "test": "node --test"
+  },
+  "peerDependencies": {
+    "eslint": "^8.57.0 || ^9.0.0"
+  },
+  "devDependencies": {
+    "@typescript-eslint/parser": "^8.0.0",
+    "eslint": "^9.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TamerlanPirmammadov93/eslint-plugin-code-conventions.git"
+  },
+  "homepage": "https://github.com/TamerlanPirmammadov93/eslint-plugin-code-conventions#readme",
+  "bugs": {
+    "url": "https://github.com/TamerlanPirmammadov93/eslint-plugin-code-conventions/issues"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
