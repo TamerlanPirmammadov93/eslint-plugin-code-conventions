@@ -1,6 +1,6 @@
 {
   "name": "eslint-plugin-code-conventions",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "ESLint rules for team naming and structure conventions in React and TypeScript projects: handler and boolean naming, generic names, separate type imports, component file structure.",
   "keywords": [
     "eslint",
